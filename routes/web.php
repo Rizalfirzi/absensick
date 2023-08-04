@@ -21,10 +21,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [DashboardController::class, 'index']);
-Route::get('/chart-data', [DashboardController::class, 'chartData']);
+Route::middleware('auth.route')->group(function () {
+    // Route yang memerlukan autentikasi di sini
+    Route::get('/home', [DashboardController::class, 'index']);
+    Route::get('/chart-data', [DashboardController::class, 'chartData']);
 
-Route::resource('libur', LiburnasController::class);
+    Route::resource('libur', LiburnasController::class);
+});
+
 
 
 
