@@ -59,7 +59,7 @@
                 @endif
                 <hr>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('pegawai.index')}}" aria-expanded="false">
                         <span>
                             <i class="fa fa-users fa-fw"></i>
                         </span>
@@ -93,7 +93,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
+                        <a class="sidebar-link" href="{{route('harikerjapuasa.index')}}" aria-expanded="false">
                             <span>
                                 <i class="fa fa-list-alt fa-fw"></i>
                             </span>

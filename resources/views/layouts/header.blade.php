@@ -17,6 +17,11 @@
  <!-- Tambahkan link CSS untuk Bootstrap Datepicker -->
  <link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
+ <!-- Tambahkan link CSS untuk Export PDF, EXCEL, SVG -->
+ <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+ <link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" rel="stylesheet">
+
+
 <style>
     .img-with-stroke {
       display: inline-block;
@@ -42,4 +47,42 @@
     thead {
       background-color: rgb(10, 10, 90);
     }
+    .dtHorizontalVerticalExampleWrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    }
+    #dtHorizontalVerticalExample th, td {
+    white-space: nowrap;
+    max-width: 500px;
+    font-size: 12px; /* Mengurangi ukuran font */
+    }
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting:before,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_asc:before,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_asc_disabled:before,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_desc:before,
+    table.dataTable thead .sorting_desc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:before {
+    bottom: .5em;
+    }
+    .white-bottom-border {
+    position: relative;
+  }
+
+  .white-bottom-border::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 1px;
+    background-color: white;
+  }
+
+  .well1.btn {
+    margin-left: 10px;
+  }
 </style>

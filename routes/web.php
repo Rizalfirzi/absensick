@@ -1,8 +1,12 @@
 <?php
 
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\LiburnasController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HarikerjapuasaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +31,12 @@ Route::middleware('auth.route')->group(function () {
     Route::get('/chart-data', [DashboardController::class, 'chartData']);
 
     Route::resource('libur', LiburnasController::class);
+
+    Route::resource('pegawai', PegawaiController::class);
+
+    Route::get('/get-satker/{direktoratId}', [PegawaiController::class, 'getSatker']);
+
+    Route::resource('harikerjapuasa', HarikerjapuasaController::class);
 });
 
 

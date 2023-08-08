@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Harilibur extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'harilibur';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'kdharilibur';
+    public $incrementing = true;
     public $timestamps = false;
 
     // Tambahkan atribut fillable sesuai dengan kolom yang dapat diisi oleh form.

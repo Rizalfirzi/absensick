@@ -14,9 +14,10 @@ class LiburnasController extends Controller
      */
     public function index()
     {
-        $harilibur = Harilibur::orderBy('tanggal', 'asc')->get();
+        $liburnas = Harilibur::orderBy('tanggal', 'asc')->get();
+        // dd($liburnas);
 
-        return view('admin.hariliburnas.index', compact('harilibur'));
+        return view('admin.hariliburnas.index', compact('liburnas'));
     }
 
     /**
@@ -39,14 +40,14 @@ class LiburnasController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
+        $validatedData = $request->validate([
             'tanggal' => 'required',
             'keterangan' => 'required',
         ]);
 
-        Harilibur::create($request->all());
+        $harilibur = Harilibur::create($validatedData);
 
-        return redirect()->route('hariliburnas.index')->with('success', 'Libur created successfully!');
+        return redirect()->route('libur.index')->with('success', 'Libur created successfully!');
     }
 
     /**
@@ -66,10 +67,9 @@ class LiburnasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($libur)
     {
-        //
-        $liburnas = Harilibur::findOrFail($id);
+        $liburnas = Harilibur::where('kdharilibur', $libur)->first();
 
         return view('admin.hariliburnas.edit', compact('liburnas'));
     }
@@ -81,7 +81,7 @@ class LiburnasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $libur)
     {
         //
             $request->validate([
@@ -89,10 +89,11 @@ class LiburnasController extends Controller
                 'keterangan' => 'required',
             ]);
 
-            $liburnas = Harilibur::findOrFail($id);
+            $liburnas = Harilibur::where('kdharilibur', $libur)->first();
+
             $liburnas->update($request->all());
 
-            return redirect()->route('hariliburnas.index')->with('success', 'Data berhasil dihapus!');
+            return redirect()->route('libur.index')->with('success', 'Data berhasil dihapus!');
     }
 
     /**
@@ -101,12 +102,12 @@ class LiburnasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($libur)
     {
         //
-        $liburnas = Harilibur::findOrFail($id);
+        $liburnas = Harilibur::where('kdharilibur', $libur)->first();
         $liburnas->delete();
 
-        return redirect()->route('hariliburnas.index')->with('success', 'Data berhasil dihapus!');
+        return redirect()->route('libur.index')->with('success', 'Data berhasil dihapus!');
     }
 }

@@ -6,7 +6,7 @@
         <!-- Kolom lg-5 -->
         <div class="col-lg-5 d-flex align-items-stretch">
             <div class="col-lg-10">
-                <h4><i class="fa fa-list fa-fw"></i> LIBUR NASIONAL<font color='#ff0000'></font></h4>
+                <h4><i class="fa fa-list fa-fw"></i> DATA HARI KERJA BULAN PUASA<font color='#ff0000'></font></h4>
             </div>
         </div>
         <hr>
@@ -14,7 +14,7 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-12 alert">
-                    <a href='{{ route('libur.create') }}'><input type='button' class='well1 btn btn-success' id='tambah' value='Tambah Baru' style='float:right;right:5%;'></a>
+                    <a href=''><input type='button' class='well1 btn btn-success' id='tambah' value='Tambah Baru' style='float:right;right:5%;'></a>
                 </div>
             </div>
         </div>
@@ -24,22 +24,30 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Tanggal</th>
-            <th>Keterangan</th>
+            <th>HARI</th>
+            <th>TANGGAL MULAI</th>
+            <th>TANGGAL AKHIR</th>
+            <th>JAM MASUK</th>
+            <th>JAM PULANG</th>
+            <th>KETERANGAN</th>
            <th><center>Action</center></th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($liburnas as $index => $libur)
+        @foreach ($harikerjapuasa as $index => $hkp)
                 <tr>
                     <td>{{ $index + 1 }}</td>
-                    <td>{{ $libur->tanggal }}</td>
-                    <td>{{ $libur->keterangan }}</td>
+                    <td>{{ $hkp->hari }}</td>
+                    <td>{{ $hkp->tgl_awal }}</td>
+                    <td>{{ $hkp->tgl_akhir }}</td>
+                    <td>{{ $hkp->jam_masuk }}</td>
+                    <td>{{ $hkp->jam_keluar }}</td>
+                    <td>{{ $hkp->ket }}</td>
                     <td>
-                        <form action="{{ route('libur.destroy', $libur->kdharilibur) }}" method="POST">
+                        <form action="" method="POST">
 
                             <center>
-                            <a href="{{ route('libur.edit', $libur->kdharilibur) }}" class="btn btn-sm btn-primary">
+                            <a href="{{ route('harikerjapuasa.edit', $hkp->id) }}" class="btn btn-sm btn-primary">
                                 Edit
                             </a>
                             @csrf

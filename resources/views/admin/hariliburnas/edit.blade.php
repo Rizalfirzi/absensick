@@ -8,7 +8,7 @@
         </h4>
         <div class="">
             <br>
-            <form class='col-md-12' action="{{ route('libur.update', $liburnas->id) }}" method='POST'>
+            <form class='col-md-12' action="{{ route('libur.update', $liburnas->kdharilibur) }}" method='POST'>
                 @csrf
                 @method('PUT')
                 <div class='col-md-5'>
