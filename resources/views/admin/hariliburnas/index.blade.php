@@ -20,7 +20,7 @@
         </div>
     </div>
 </div>
-<table id="" class="table table-striped table-bordered" style="width:100%">
+<table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
             <th>#</th>
