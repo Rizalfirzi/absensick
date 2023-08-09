@@ -83,7 +83,7 @@
     </div>
     </div>
  <div class="container">
-    <table id="dtHorizontalVerticalExample" class="table table-striped table-bordered" style="width:100%" cellspacing="0">
+    <table id="example" class="table table-striped table-bordered" style="width:100%" cellspacing="0">
         <thead>
             <tr>
                 <th rowspan='2'>#</th>

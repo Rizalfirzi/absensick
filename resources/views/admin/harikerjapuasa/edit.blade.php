@@ -22,6 +22,10 @@
                             </select>
                         </div>
                         <div class="col-md-5">
+                            {{-- <h5>Keterangan</h5>
+                            <textarea name="ket" id="ket" class="form-control well2" rows="5">{{ $harikerjapuasa->ket }}</textarea> --}}
+                        </div>
+                        <div class="col-md-5">
                             <h5>Tanggal Awal</h5>
                             <input type="date" name="tgl_awal" id="startDate" class="form-control well1"
                                 value="{{ $harikerjapuasa->tgl_awal }}">
@@ -45,9 +49,14 @@
                             <h5>Keterangan</h5>
                             <textarea name="ket" id="ket" class="form-control well2" rows="5">{{ $harikerjapuasa->ket }}</textarea>
                         </div>
+                        <div class="col-md-5">
+                            {{-- <h5>Keterangan</h5>
+                            <textarea name="ket" id="ket" class="form-control well2" rows="5">{{ $harikerjapuasa->ket }}</textarea> --}}
+                        </div>
                         <div class="form-group row">
                             <div class="col-md-3"></div>
                             <div class="col-md-9">
+                                <br>
                                 <input type="submit" name="submitAdd" id="submitAdd" class="btn btn-primary"
                                     value="Simpan">
                                 <button class="btn btn-danger" id="cancel"

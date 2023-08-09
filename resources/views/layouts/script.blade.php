@@ -65,7 +65,7 @@
   <!-- Include Bootstrap JS -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-  
+
   <script>
       document.addEventListener('DOMContentLoaded', function() {
           fetch('/chart-data')
@@ -113,18 +113,17 @@
 
   <script>
       $(document).ready(function() {
-          $('#dtHorizontalVerticalExample').DataTable({
+          new DataTable('#example', {
               "scrollX": true,
               dom: 'Bfrtip',
               buttons: [
                   'csv', 'excel', 'pdf'
               ]
           });
-          $('.dataTables_length').addClass('bs-select');
       });
-
-      new DataTable('#example', {
-          "scrollX": true,
+      $(document).ready(function() {
+          new DataTable('#example2', {
+          });
       });
   </script>
 
