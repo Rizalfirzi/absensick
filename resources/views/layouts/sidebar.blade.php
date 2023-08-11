@@ -85,7 +85,7 @@
                 @if (Auth::user()->roles[0]->name == 'SUPER ADMIN')
                     <hr>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{'/harga_jabatan'}}" aria-expanded="false">
+                        <a class="sidebar-link" href="{{route('hargajabatan.index')}}" aria-expanded="false">
                             <span>
                                 <i class="fa fa-list-alt fa-fw"></i>
                             </span>

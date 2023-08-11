@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
+use App\Models\Direktorat;
+use App\Models\Satker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PegawaiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
+        $direktorats = Direktorat::all();
         $pegawai = DB::table('t_pegawai')
             ->select('t_pegawai.*', 'direktorat.direktorat as nama_direktorat', 'satker.nama as nama_satker')
             ->leftJoin('direktorat', 't_pegawai.direktorat_id', '=', 'direktorat.direktorat_id')
@@ -20,11 +20,79 @@ class PegawaiController extends Controller
                 $join->on('t_pegawai.satker_id', '=', 'satker.satker_id')->orWhere('t_pegawai.ppk_id', '=', DB::raw('satker.satker_id'));
             })
             ->where('t_pegawai.status', 1)
+            ->where('t_pegawai.aktif', 'Aktif')
             ->orderBy('t_pegawai.satker_id')
             ->orderBy('t_pegawai.nama', 'asc')
             ->get();
 
-        return view('admin.pegawai.index', compact('pegawai'));
+        return view('admin.pegawai.index', compact('direktorats', 'pegawai'));
+    }
+
+    public function getSatker($direktoratId)
+    {
+        $satkers = Satker::where('direktorat_id', $direktoratId)->get();
+
+        return response()->json($satkers);
+    }
+
+    public function filter(Request $request)
+    {
+
+        $aktif = $request->input('aktif');
+        $direktoratId = $request->input('direktorat');
+
+        $direktorats = DB::table('direktorat')->get();
+        $satkerOptions = [];
+
+        $pegawaiQuery = DB::table('t_pegawai')
+            ->select('t_pegawai.*', 'direktorat.direktorat as nama_direktorat', 'satker.nama as nama_satker')
+            ->leftJoin('direktorat', 't_pegawai.direktorat_id', '=', 'direktorat.direktorat_id')
+            ->leftJoin('satker', function ($join) {
+                $join->on('t_pegawai.satker_id', '=', 'satker.satker_id')
+                    ->orWhere('t_pegawai.ppk_id', '=', DB::raw('satker.satker_id'));
+            })
+            ->where('t_pegawai.status', 1);
+
+        if ($direktoratId) {
+            $satkerOptions = DB::table('satker')
+                ->where('direktorat_id', $direktoratId)
+                ->get();
+            $pegawaiQuery->where('t_pegawai.direktorat_id', $direktoratId);
+        }
+
+        if ($aktif) {
+            $pegawaiQuery->where('t_pegawai.aktif', $aktif);
+        }
+
+        $pegawai = $pegawaiQuery
+            ->orderBy('t_pegawai.satker_id')
+            ->orderBy('t_pegawai.nama', 'asc')
+            ->get();
+
+// dd($pegawai);
+// dd($pegawaiQuery->toSql());
+        return view('admin.pegawai.filtered', compact('pegawai','direktorats','satkerOptions'));
+    }
+    /**
+     * Display a listing of the resource.
+     */
+    // public function index(Request $request)
+    // {
+    //     $pegawai = DB::table('t_pegawai')
+    //         ->select('t_pegawai.*', 'direktorat.direktorat as nama_direktorat', 'satker.nama as nama_satker')
+    //         ->leftJoin('direktorat', 't_pegawai.direktorat_id', '=', 'direktorat.direktorat_id')
+    //         ->leftJoin('satker', function ($join) {
+    //             $join->on('t_pegawai.satker_id', '=', 'satker.satker_id')->orWhere('t_pegawai.ppk_id', '=', DB::raw('satker.satker_id'));
+    //         })
+    //         ->where('t_pegawai.status', 1)
+    //         ->where('t_pegawai.aktif', 'Aktif')
+    //         ->orderBy('t_pegawai.satker_id')
+    //         ->orderBy('t_pegawai.nama', 'asc')
+    //         ->get();
+
+    //     return view('admin.pegawai.index', compact('pegawai'));
+
+
         // $direktorats = DB::table('direktorat')->get();
         // $pegawai = [];
         // $satkerOptions = [];
@@ -55,7 +123,7 @@ class PegawaiController extends Controller
         // }
 
         // return view('admin.pegawai.index', compact('direktorats', 'pegawai', 'satkerOptions'));
-    }
+    // }
 
     // public function getSatker($direktoratId)
     // {

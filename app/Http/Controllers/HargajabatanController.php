@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HargaJabatan;
 use Illuminate\Http\Request;
 
 class HargajabatanController extends Controller
@@ -12,6 +13,8 @@ class HargajabatanController extends Controller
     public function index()
     {
         //
+        $harga_jabatan = HargaJabatan::orderBy('id', 'asc')->get();
+        return view('admin.hargajabatan.index', compact('harga_jabatan'));
     }
 
     /**
@@ -20,6 +23,7 @@ class HargajabatanController extends Controller
     public function create()
     {
         //
+        return view('admin.hargajabatan.create');
     }
 
     /**
@@ -28,6 +32,8 @@ class HargajabatanController extends Controller
     public function store(Request $request)
     {
         //
+        $harga_jabatan = HargaJabatan::create($request->all());
+        return redirect()->route('hargajabatan.index')->with('success', 'Jam kerja berhasil diperbarui!.');
     }
 
     /**
@@ -44,6 +50,8 @@ class HargajabatanController extends Controller
     public function edit(string $id)
     {
         //
+        $harga_jabatan = HargaJabatan::find($id);
+        return view('admin.hargajabatan.edit', compact('harga_jabatan'));
     }
 
     /**
@@ -52,6 +60,9 @@ class HargajabatanController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $harga_jabatan = HargaJabatan::find($id);
+        $harga_jabatan->update($request->all());
+        return redirect()->route('hargajabatan.index')->with('success', 'Jam kerja berhasil diperbarui!.');
     }
 
     /**
@@ -60,5 +71,8 @@ class HargajabatanController extends Controller
     public function destroy(string $id)
     {
         //
+        $harga_jabatan = HargaJabatan::findOrFail($id);
+        $harga_jabatan->delete();
+        return redirect()->route('hargajabatan.index')->with('success', 'Jam kerja berhasil dihapus!.');
     }
 }

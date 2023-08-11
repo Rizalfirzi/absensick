@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class HargaJabatan extends Model
 {
     use HasFactory;
+    protected $table = 'harga_jabatan';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'peringkat_jabatan',
+        'harga_jabatan',
+        'harga_jabatan2',
+    ];
 }

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\LiburnasController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HargajabatanController;
 use App\Http\Controllers\HarikerjapuasaController;
 
 /*
@@ -33,10 +34,16 @@ Route::middleware('auth.route')->group(function () {
     Route::resource('libur', LiburnasController::class);
 
     Route::resource('pegawai', PegawaiController::class);
+    // Route::get('/get-satkers/{direktoratId}', [PegawaiController::class, 'getSatkersByDirektorat']);
 
+    // Route::get('/get-satkers/{direktoratId}', [PegawaiController::class, 'getSatkersByDirektorat']);
+    // Route::get('/get-filtered-pegawai', [PegawaiController::class, 'getFilteredPegawai']);
     Route::get('/get-satker/{direktoratId}', [PegawaiController::class, 'getSatker']);
+    Route::post('/pegawai', [PegawaiController::class, 'filter'])->name('pegawai.filter');
 
     Route::resource('harikerjapuasa', HarikerjapuasaController::class);
+
+    Route::resource('hargajabatan', HargajabatanController::class);
 });
 
 

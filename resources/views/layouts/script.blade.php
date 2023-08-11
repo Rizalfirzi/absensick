@@ -122,8 +122,7 @@
           });
       });
       $(document).ready(function() {
-          new DataTable('#example2', {
-          });
+          new DataTable('#example2', {});
       });
   </script>
 
@@ -139,27 +138,67 @@
   </script>
 
   {{-- filter data karyawan --}}
+  <script>
+      // Script untuk mengisi opsi satker berdasarkan pilihan direktorat
+      document.getElementById('direktorat').addEventListener('change', function() {
+          const selectedDirektoratId = this.value;
+          const satkerSelect = document.getElementById('satker');
+
+          // Clear opsi satker sebelumnya
+          satkerSelect.innerHTML = '<option value="">-- Pilih Satker --</option>';
+
+          // Jika direktorat terpilih, ambil data satker melalui AJAX
+          if (selectedDirektoratId) {
+              fetch(`/get-satker/${selectedDirektoratId}`)
+                  .then(response => response.json())
+                  .then(data => {
+                      data.forEach(satker => {
+                          const option = document.createElement('option');
+                          option.value = satker.satker_id;
+                          option.textContent = satker.nama;
+                          satkerSelect.appendChild(option);
+                      });
+                  });
+          }
+      });
+  </script>
+
   {{-- <script>
-       // Script untuk mengisi opsi satker berdasarkan pilihan direktorat
-    document.getElementById('direktorat').addEventListener('change', function() {
-        const selectedDirektoratId = this.value;
-        const satkerSelect = document.getElementById('satker');
+    $(document).ready(function () {
+        $('#direktorat').on('change', function () {
+            const selectedDirektoratId = $(this).val();
+            const satkerSelect = $('#satker');
 
-        // Clear opsi satker sebelumnya
-        satkerSelect.innerHTML = '<option value="">-- Pilih Satker --</option>';
+            // Clear opsi satker sebelumnya
+            satkerSelect.html('<option value="">-- Pilih Satker --</option>');
 
-        // Jika direktorat terpilih, ambil data satker melalui AJAX
-        if (selectedDirektoratId) {
-            fetch(`/get-satker/${selectedDirektoratId}`)
-                .then(response => response.json())
-                .then(data => {
-                    data.forEach(satker => {
-                        const option = document.createElement('option');
-                        option.value = satker.satker_id;
-                        option.textContent = satker.nama;
-                        satkerSelect.appendChild(option);
-                    });
+            // Jika direktorat terpilih, ambil data satker melalui AJAX
+            if (selectedDirektoratId) {
+                $.ajax({
+                    url: `/get-satker/${selectedDirektoratId}`,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        data.forEach(function (satkers) {
+                            const option = $('<option>').val(satker.satker_id).textContent(satker.nama);
+                            satkerSelect.append(option);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
                 });
-        }
+            }
+        });
+
+    $('#proses').on('click', function () {
+        var direktoratId = $('#direktorat').val();
+        var satkerId = $('#satker').val();
+        var aktif = $('#aktif').val();
+
+        $.post('/process-filter', { direktorat: direktoratId, satker: satkerId, aktif: aktif }, function (data) {
+            $('#pegawai-table-body').html(data);
+        });
     });
+});
   </script> --}}

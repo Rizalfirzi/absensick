@@ -85,4 +85,21 @@
   .well1.btn {
     margin-left: 10px;
   }
+  input {
+    border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 8px;
+      background-color: #f0f0f0;
+    }
+    textarea {
+    border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 8px;
+      background-color: #f0f0f0;
+    }
+
+    .flex-item {
+        margin-right: 10px; /* Memberi jarak antara elemen-elemen */
+    }
+
 </style>
