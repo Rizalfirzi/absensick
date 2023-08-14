@@ -42,6 +42,43 @@ class SkpController extends Controller
         // dd($skps);
         return view('admin.skp.index', compact('skps', 'tahun', 'direktorats', 'years'));
     }
+
+    public function filter(Request $request)
+{
+    $direktoratId = $request->input('direktorat');
+    $satkerId = $request->input('satker');
+    $tahun = $request->input('tahun');
+
+    $query = SKP::query()
+        ->join('t_pegawai', 'skp.nip', '=', 't_pegawai.nip')
+        ->join('satker', function ($join) {
+            $join->on('t_pegawai.satker_id', '=', 'satker.satker_id')
+                 ->orOn('t_pegawai.ppk_id', '=', 'satker.satker_id');
+        })
+        ->where('t_pegawai.status', 1);
+
+    if ($tahun) {
+        $query->where('skp.tahun', $tahun);
+    }
+
+    if ($direktoratId) {
+        $query->where('t_pegawai.direktorat_id', $direktoratId);
+    }
+
+    if ($satkerId) {
+        $query->where('t_pegawai.satker_id', $satkerId);
+    }
+
+    $query->orderBy('skp.tahun', 'asc')
+          ->orderBy('skp.nip', 'asc')
+          ->orderBy('t_pegawai.nama', 'asc');
+
+    $results = $query->select('skp.id', 'skp.nip', 'skp.nilai', 'skp.persentase', 'skp.tahun', 't_pegawai.nama as nama_pegawai', 'satker.nama as nama_satker')
+                     ->distinct('skp.tahun', 'skp.nip')
+                     ->get();
+
+    return view('admin.skp.filtered', compact('results'));
+}
     /**
      * Show the form for creating a new resource.
      */

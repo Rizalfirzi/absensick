@@ -66,7 +66,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($skps as $index => $data)
+                @foreach ($results as $index => $data)
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $data->nama_satker }}</td>

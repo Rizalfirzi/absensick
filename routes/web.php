@@ -27,26 +27,30 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Route yang memerlukan autentikasi di sini
 Route::middleware('auth.route')->group(function () {
-    // Route yang memerlukan autentikasi di sini
+// route DashboardController
     Route::get('/home', [DashboardController::class, 'index']);
     Route::get('/chart-data', [DashboardController::class, 'chartData']);
 
+    // route LiburnasController
     Route::resource('libur', LiburnasController::class);
 
+    // route PegawaiController
     Route::resource('pegawai', PegawaiController::class);
-    // Route::get('/get-satkers/{direktoratId}', [PegawaiController::class, 'getSatkersByDirektorat']);
-
-    // Route::get('/get-satkers/{direktoratId}', [PegawaiController::class, 'getSatkersByDirektorat']);
-    // Route::get('/get-filtered-pegawai', [PegawaiController::class, 'getFilteredPegawai']);
     Route::get('/get-satker/{direktoratId}', [PegawaiController::class, 'getSatker']);
     Route::post('/pegawai', [PegawaiController::class, 'filter'])->name('pegawai.filter');
 
+    // route HarikerjapuasaController
     Route::resource('harikerjapuasa', HarikerjapuasaController::class);
 
+    // route HargajabatanController
     Route::resource('hargajabatan', HargajabatanController::class);
-    
+
+    // route SkpController
     Route::resource('skp', SkpController::class);
+    Route::post('/skp', [SkpController::class, 'filter'])->name('skp.filter');
+
 });
 
 
