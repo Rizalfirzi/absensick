@@ -25,4 +25,9 @@ class Pegawai extends Model
         return $this->belongsTo(Satker::class, 'ppk_id');
     }
 
+    public function skps()
+    {
+        return $this->hasMany(Skp::class, 'nip', 'nip');
+    }
+
 }

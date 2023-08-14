@@ -21,4 +21,9 @@ class Satker extends Model
     {
         return $this->hasMany(Pegawai::class, 'ppk_id');
     }
+
+    public function skps()
+    {
+        return $this->hasMany(Skp::class, 'satker_id');
+    }
 }

@@ -110,7 +110,7 @@
                     </li>
                 @endif
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('skp.index')}}" aria-expanded="false">
                         <span>
                             <i class="fa fa-trophy fa-fw"></i>
                         </span>

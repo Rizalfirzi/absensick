@@ -3,6 +3,7 @@
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SkpController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\LiburnasController;
 use App\Http\Controllers\DashboardController;
@@ -44,6 +45,8 @@ Route::middleware('auth.route')->group(function () {
     Route::resource('harikerjapuasa', HarikerjapuasaController::class);
 
     Route::resource('hargajabatan', HargajabatanController::class);
+    
+    Route::resource('skp', SkpController::class);
 });
 
 

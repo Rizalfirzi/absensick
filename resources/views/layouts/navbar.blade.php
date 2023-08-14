@@ -12,11 +12,18 @@
                 </a>
             </li>
         </ul>
-        <a class="navbar-brand" href="">
-            <h5 style="color: white">SISTEM INFORMASI KEHADIRAN PEGAWAI <br>
-                <h6 style="color: white">DIREKTORAT JENDERAL CIPTA KARYA</h6>
-            </h5>
-        </a>
+        <div class="justify-content-end px-0" id="navbarNav" style="">
+            <ul class="navbar-nav d-flex flex-row align-items-center justify-content-end">
+                <li class="nav-item mr-3" style="padding-right: 50px">
+                    <a style="color: white; font-size: 20px">
+                            SISTEM INFORMASI KEHADIRAN PEGAWAI <br>
+                            DIREKTORAT JENDERAL CIPTA KARYA
+
+                    </a>
+                </li>
+            </ul>
+        </div>
+
         <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav d-flex flex-row align-items-center justify-content-end">
                 <li class="nav-item mr-3" style="padding-right: 10px">

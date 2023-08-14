@@ -38,7 +38,7 @@
 
   <script src="{{ asset('js/chart/code/highcharts.js') }}"></script>
   <script src="{{ asset('js/chart/code/modules/exporting.js') }}"></script>
-  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="{{ asset('js/chart/code/highchartv11-1-0.js') }}"></script>
 
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -122,7 +122,9 @@
           });
       });
       $(document).ready(function() {
-          new DataTable('#example2', {});
+          new DataTable('#example2', {
+            "scrollX": true,
+          });
       });
   </script>
 
