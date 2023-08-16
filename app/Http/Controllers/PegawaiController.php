@@ -37,12 +37,11 @@ class PegawaiController extends Controller
 
     public function filter(Request $request)
     {
-
+        $satkerId = $request->input('satker');
         $aktif = $request->input('aktif');
         $direktoratId = $request->input('direktorat');
 
         $direktorats = DB::table('direktorat')->get();
-        $satkerOptions = [];
 
         $pegawaiQuery = DB::table('t_pegawai')
             ->select('t_pegawai.*', 'direktorat.direktorat as nama_direktorat', 'satker.nama as nama_satker')
@@ -53,16 +52,23 @@ class PegawaiController extends Controller
             })
             ->where('t_pegawai.status', 1);
 
-        if ($direktoratId) {
-            $satkerOptions = DB::table('satker')
-                ->where('direktorat_id', $direktoratId)
-                ->get();
-            $pegawaiQuery->where('t_pegawai.direktorat_id', $direktoratId);
-        }
+            if ($direktoratId) {
+                $pegawaiQuery->where(function ($query) use ($direktoratId) {
+                    $query->where('t_pegawai.direktorat_id', $direktoratId)
+                        ->orWhere('t_pegawai.ppk_id', '=', DB::raw($direktoratId));
+                });
+            }
 
-        if ($aktif) {
-            $pegawaiQuery->where('t_pegawai.aktif', $aktif);
-        }
+            if ($aktif) {
+                $pegawaiQuery->where('t_pegawai.aktif', $aktif);
+            }
+
+            if ($satkerId) {
+                $pegawaiQuery->where(function ($query) use ($satkerId) {
+                    $query->where('t_pegawai.satker_id', $satkerId)
+                        ->orWhere('t_pegawai.ppk_id', '=', DB::raw($satkerId));
+                });
+            }
 
         $pegawai = $pegawaiQuery
             ->orderBy('t_pegawai.satker_id')
@@ -71,7 +77,7 @@ class PegawaiController extends Controller
 
 // dd($pegawai);
 // dd($pegawaiQuery->toSql());
-        return view('admin.pegawai.filtered', compact('pegawai','direktorats','satkerOptions'));
+        return view('admin.pegawai.filtered', compact('pegawai','direktorats'));
     }
     /**
      * Display a listing of the resource.

@@ -4,6 +4,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SkpController;
+use App\Http\Controllers\TukinController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\LiburnasController;
 use App\Http\Controllers\DashboardController;
@@ -29,7 +30,7 @@ Auth::routes();
 
 // Route yang memerlukan autentikasi di sini
 Route::middleware('auth.route')->group(function () {
-// route DashboardController
+    // route DashboardController
     Route::get('/home', [DashboardController::class, 'index']);
     Route::get('/chart-data', [DashboardController::class, 'chartData']);
 
@@ -49,10 +50,14 @@ Route::middleware('auth.route')->group(function () {
 
     // route SkpController
     Route::resource('skp', SkpController::class);
+    Route::get('/get-satker/{direktoratId}', [SkpController::class, 'getSatker']);
     Route::post('/skp', [SkpController::class, 'filter'])->name('skp.filter');
+    Route::post('/simpan-skp', [SkpController::class, 'simpanSKP'])->name('simpan_skp');
+
+    // route TukinController
+    Route::resource('tukin', TukinController::class);
+    Route::get('/get-satker/{direktoratId}', [TukinController::class, 'getSatker']);
+    Route::post('/tukin', [TukinController::class, 'filter'])->name('tukin.filter');
+
 
 });
-
-
-
-

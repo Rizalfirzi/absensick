@@ -16,4 +16,9 @@ class HargaJabatan extends Model
         'harga_jabatan',
         'harga_jabatan2',
     ];
+
+    public function tukinMatangs()
+    {
+        return $this->hasMany(Tukin::class, 'gradejabatan', 'peringkat_jabatan');
+    }
 }

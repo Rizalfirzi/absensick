@@ -12,7 +12,7 @@ class Harilibur extends Model
     protected $table = 'harilibur';
     protected $primaryKey = 'kdharilibur';
     public $incrementing = true;
-    public $timestamps = false; 
+    public $timestamps = false;
 
     // Tambahkan atribut fillable sesuai dengan kolom yang dapat diisi oleh form.
     protected $fillable = ['tanggal', 'keterangan'];

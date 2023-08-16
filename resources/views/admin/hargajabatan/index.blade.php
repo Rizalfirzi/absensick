@@ -14,20 +14,20 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-12 alert">
-                        <a href='{{ 'hargajabatan.create' }}'><input type='button' class='well1 btn btn-success'
+                        <a href="{{ route('hargajabatan.create') }}"><input type='button' class='well1 btn btn-success'
                                 id='tambah' value='Tambah Baru' style='float:right;right:5%;'></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <table id="" class="table table-striped table-bordered" style="width:100%">
+    <table id="example2" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Peringkat Jabatan</th>
-                <th>Harga Jabatan</th>
                 <th>Harga Jabatan Lama</th>
+                <th>Harga Jabatan Baru</th>
                 <th>
                     <center>Action</center>
                 </th>
@@ -38,8 +38,8 @@
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $data->peringkat_jabatan }}</td>
-                    <td>{{ $data->harga_jabatan }}</td>
-                    <td>{{ $data->harga_jabatan2 }}</td>
+                    <td>{{ number_format($data->harga_jabatan, 0, ',', '.') }}</td>
+                    <td>{{ number_format($data->harga_jabatan2, 0, ',', '.') }}</td>
                     <td>
                         <center>
                             <a href="{{ route('hargajabatan.edit', $data->id) }}" class="btn btn-warning">Edit</a> |

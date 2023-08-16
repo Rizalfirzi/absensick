@@ -47,52 +47,59 @@
                         </div>
                     </div>
                 </form>
+            </div>
         </div>
-    </div>
 
-    <br>
-    <div class="container">
-        <table id="example2" class="table table-striped table-bordered" style="width:100%" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>SATKER/UNIT KERJA</th>
-                    <th>NIK</th>
-                    <th>NAMA</th>
-                    <th>TAHUN</th>
-                    <th>PRESTASI KINERJA (%)</th>
-                    <th>PREDIKAT KINERJA</th>
-                    <th>ACTION</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($results as $index => $data)
+        <br>
+        <div class="container">
+            <table id="example2" class="table table-striped table-bordered" style="width:100%" cellspacing="0">
+                <thead>
                     <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $data->nama_satker }}</td>
-                        <td>{{ $data->nip }}</td>
-                        <td>{{ $data->nama_pegawai}}</td>
-                        <td>{{ $data->tahun }}</td>
-                        <td>{{ $data->persentase }}</td>
-                        <td>
-                            @if ($data->nilai >= 100)
-                                Sangat Baik
-                            @elseif ($data->nilai >= 76 && $data->nilai <= 90)
-                                Baik
-                            @elseif ($data->nilai >= 61 && $data->nilai <= 75)
-                                Butuh Perbaikan
-                            @elseif ($data->nilai >= 51 && $data->nilai <= 60)
-                                Kurang
-                            @else
-                                Sangat Kurang
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{ route('skp.edit', $data->id) }}">Edit</a>
-                        </td>
+                        <th>#</th>
+                        <th>SATKER/UNIT KERJA</th>
+                        <th>NIK</th>
+                        <th>NAMA</th>
+                        <th>TAHUN</th>
+                        <th>PRESTASI KINERJA (%)</th>
+                        <th>PREDIKAT KINERJA</th>
+                        <th>ACTION</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-@endsection
+                </thead>
+                <tbody>
+                    @foreach ($results as $index => $data)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $data->nama_satker }}</td>
+                            <td>{{ $data->nip }}</td>
+                            <td>{{ $data->nama_pegawai }}</td>
+                            <td>{{ $data->tahun }}</td>
+                            <td>{{ $data->persentase }}</td>
+                            <td>
+                                @if ($data->nilai >= 100)
+                                    Sangat Baik
+                                @elseif ($data->nilai >= 76 && $data->nilai <= 90)
+                                    Baik
+                                @elseif ($data->nilai >= 61 && $data->nilai <= 75)
+                                    Butuh Perbaikan
+                                @elseif ($data->nilai >= 51 && $data->nilai <= 60)
+                                    Kurang
+                                @else
+                                    Sangat Kurang
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('skp.edit', $data->id) }}">Edit</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <script>
+            // Automatically go back to the previous page without confirmation on refresh
+            if (performance.navigation.type === 1) {
+                window.location.href = '{{ route('skp.index') }}';
+            }
+        </script>
+    @endsection

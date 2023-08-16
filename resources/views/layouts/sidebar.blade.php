@@ -152,7 +152,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('tukin.index')}}" aria-expanded="false">
                         <span>
                             <i class="fa fa-files-o fa-fw"></i>
                         </span>

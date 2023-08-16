@@ -154,7 +154,7 @@
     <script>
         // Automatically go back to the previous page without confirmation on refresh
         if (performance.navigation.type === 1) {
-            window.history.back();
+            window.location.href = '{{ route('pegawai.index') }}';
         }
     </script>
 

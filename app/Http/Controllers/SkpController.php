@@ -43,42 +43,85 @@ class SkpController extends Controller
         return view('admin.skp.index', compact('skps', 'tahun', 'direktorats', 'years'));
     }
 
+    public function getSatker($direktoratId)
+    {
+        $satkers = Satker::where('direktorat_id', $direktoratId)->get();
+
+        return response()->json($satkers);
+    }
+
     public function filter(Request $request)
-{
-    $direktoratId = $request->input('direktorat');
-    $satkerId = $request->input('satker');
-    $tahun = $request->input('tahun');
+    {
+        $currentYear = date('Y');
+        $startYear = 2015;
+        $endYear = $currentYear - 1;
+        $years = [];
 
-    $query = SKP::query()
-        ->join('t_pegawai', 'skp.nip', '=', 't_pegawai.nip')
-        ->join('satker', function ($join) {
-            $join->on('t_pegawai.satker_id', '=', 'satker.satker_id')
-                 ->orOn('t_pegawai.ppk_id', '=', 'satker.satker_id');
-        })
-        ->where('t_pegawai.status', 1);
+        for ($year = $startYear; $year <= $endYear; $year++) {
+            $years[] = $year;
+        }
+        $direktoratId = $request->input('direktorat');
+        $satkerId = $request->input('satker');
+        $tahun = $request->input('tahun');
 
-    if ($tahun) {
-        $query->where('skp.tahun', $tahun);
+        $direktorats = DB::table('direktorat')->get(); // Menggunakan \Illuminate\Support\Facades\DB
+        $satkerOptions = [];
+
+        $query = DB::table('skp')
+            ->join('t_pegawai', 'skp.nip', '=', 't_pegawai.nip')
+            ->join('satker', function ($join) {
+                $join->on('t_pegawai.satker_id', '=', 'satker.satker_id')->orOn('t_pegawai.ppk_id', '=', DB::raw('satker.satker_id')); // Menggunakan DB::raw()
+            })
+            ->where('t_pegawai.status', 1);
+
+        if ($tahun) {
+            $query->where('skp.tahun', $tahun);
+        }
+
+        if ($direktoratId) {
+            $satkerOptions = DB::table('satker')
+                ->where('direktorat_id', $direktoratId)
+                ->get();
+            $query->where('t_pegawai.direktorat_id', $direktoratId);
+        }
+
+        if ($satkerId) {
+            $query->where('t_pegawai.satker_id', $satkerId);
+        }
+
+        $query
+            ->orderBy('skp.tahun', 'asc')
+            ->orderBy('skp.nip', 'asc')
+            ->orderBy('t_pegawai.nama', 'asc');
+
+        $results = $query
+            ->select('skp.id', 'skp.nip', 'skp.nilai', 'skp.persentase', 'skp.tahun', 't_pegawai.nama as nama_pegawai', 'satker.nama as nama_satker')
+            ->distinct('skp.tahun', 'skp.nip')
+            ->get();
+
+        return view('admin.skp.filtered', compact('results', 'direktorats', 'satkerOptions', 'years'));
     }
 
-    if ($direktoratId) {
-        $query->where('t_pegawai.direktorat_id', $direktoratId);
+    public function simpanSKP(Request $request)
+    {
+        $nip = $request->input('nip');
+        $ket = $request->input('ket');
+
+        // Temukan data SKP berdasarkan NIP
+        $skp = SKP::where('nip', $nip)->first();
+
+        if ($skp) {
+            // Lakukan perubahan data
+            $skp->keterangan = $ket;
+            $skp->save();
+
+            // Respon berhasil
+            return response()->json(['status' => 'success']);
+        } else {
+            // Jika data SKP tidak ditemukan, berikan respon error
+            return response()->json(['status' => 'error', 'message' => 'Data SKP tidak ditemukan']);
+        }
     }
-
-    if ($satkerId) {
-        $query->where('t_pegawai.satker_id', $satkerId);
-    }
-
-    $query->orderBy('skp.tahun', 'asc')
-          ->orderBy('skp.nip', 'asc')
-          ->orderBy('t_pegawai.nama', 'asc');
-
-    $results = $query->select('skp.id', 'skp.nip', 'skp.nilai', 'skp.persentase', 'skp.tahun', 't_pegawai.nama as nama_pegawai', 'satker.nama as nama_satker')
-                     ->distinct('skp.tahun', 'skp.nip')
-                     ->get();
-
-    return view('admin.skp.filtered', compact('results'));
-}
     /**
      * Show the form for creating a new resource.
      */

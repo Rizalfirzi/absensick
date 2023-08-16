@@ -12,13 +12,13 @@
                 @csrf
                 @method('PUT')
                 <div class='col-md-5'>
-                    <h5>Tanggal</h5>
-                    <input type="text" name='tanggal' id="tanggal" class="col-md-12 well1 " value="{{ $harga_jabatan->peringkat_jabatan }}" requied>
+                    <h5>ID PERINGKAT JABATAN</h5>
+                    <input type="text" name='peringkat_jabatan' id="peringkat_jabatan" class="col-md-12 well1 " value="{{ $harga_jabatan->peringkat_jabatan }}" requied>
                 </div>
                 <div class='col-md-12'></div>
                 <div class='col-md-5'>
-                    <h5>Keterangan</h5>
-                    <input name='keterangan' id='keterangan' class="col-md-12 well1 " value="{{ $harga_jabatan->harga_jabatan2 }}" >
+                    <h5>HARGA JABATAN</h5>
+                    <input name='harga_jabatan2' id='harga_jabatan2' class="col-md-12 well1 " value="{{ $harga_jabatan->harga_jabatan2 }}" >
                 </div>
                 <div class="form-group row">
                     <div class="col-md-3"></div>

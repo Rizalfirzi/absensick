@@ -21,21 +21,6 @@
   <script src="{{ asset('assets/bower_components/js/jquery.doubleScroll.js') }}"></script>
   <script src="{{ asset('assets/bower_components/js/chzn/chosen.jquery.js') }}"></script>
 
-  <!-- jQuery -->
-  <script src="{{ asset('assets/bower_components/jquery/dist/jquery.min.js') }}"></script>
-  <!-- Bootstrap Core JavaScript -->
-  <script src="{{ asset('assets/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-
-  <!-- Metis Menu Plugin JavaScript -->
-  <script src="{{ asset('assets/bower_components/metisMenu/dist/metisMenu.min.js') }}"></script>
-
-  <!-- Custom Theme JavaScript -->
-  <script src="{{ asset('assets/bower_components/dist/js/sb-admin-2.js') }}"></script>
-  <script src="{{ asset('assets/bower_components/moment.js') }}"></script>
-  <script src="{{ asset('assets/bower_components/daterangepicker.js') }}"></script>
-  <script src="{{ asset('assets/bower_components/js/jquery.doubleScroll.js') }}"></script>
-  <script src="{{ asset('assets/bower_components/js/chzn/chosen.jquery.js') }}"></script>
-
   <script src="{{ asset('js/chart/code/highcharts.js') }}"></script>
   <script src="{{ asset('js/chart/code/modules/exporting.js') }}"></script>
   <script src="{{ asset('js/chart/code/highchartv11-1-0.js') }}"></script>
@@ -126,6 +111,12 @@
             "scrollX": true,
           });
       });
+      $(document).ready(function() {
+          new DataTable('#example3', {
+            "scrollX": true,
+          });
+      });
+      $('#example3 thead th').css('text-align', 'center');
   </script>
 
   <script>
