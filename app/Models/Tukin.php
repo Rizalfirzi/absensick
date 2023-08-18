@@ -11,6 +11,8 @@ class Tukin extends Model
 
     protected $table = 't_tukin_matang';
 
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'nip', 'nama', 'gradejabatan', 'harga_jabatan', 'skp_persentase', 'tukin_dasar',
         'tukin_terima', 'cuti_besar', 'cuti_besar_pot', 'cuti_penting', 'cuti_penting_pot',

@@ -34,5 +34,8 @@ class Pegawai extends Model
     {
         return $this->hasMany(Tukin::class, 'nip', 'nip');
     }
-
+    public function tukinMatang()
+    {
+        return $this->hasMany(TukinMatang::class, 'nip', 'nip');
+    }
 }

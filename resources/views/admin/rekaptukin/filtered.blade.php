@@ -1,10 +1,10 @@
 @extends('layouts.master')
 @section('content')
-<style>
-     th {
+    <style>
+        .text_header_tabel {
             text-align: center;
         }
-</style>
+    </style>
     <div class="container">
         <div class="row">
             <!-- Kolom lg-5 -->
@@ -57,10 +57,11 @@
                         <div class="col-md-2">
                             <div class="btn-group">
                                 <div>
-                                  <a href="">  <input type="button" class="well1 btn btn-primary" id="lihat" value="Lihat"></a>
+                                    <button class="btn btn-primary">lihat</button>
                                 </div>
                                 <div>
-                                    <a href=""><input type="button" class="well1 btn btn-primary" id="proses" value="Proses"></a>
+                                    <a href=""><input type="button" class="well1 btn btn-primary" id="proses"
+                                            value="Proses"></a>
                                 </div>
                             </div>
                             <div class="mt-2"> <!-- Add some margin at the top -->
@@ -77,88 +78,129 @@
             <table id="example3" class="lebartabel table table-bordered table-striped" width="100%" cellspacing="1">
                 <thead>
                     <tr>
-                        <th rowspan="4" >NIP</th>
-                        <th rowspan="4">NAMA</th>
-                        <th rowspan="4">PERINGKAT JABATAN</th>
+                        <th class="text_header_tabel" rowspan="4">NIP</th>
+                        <th class="text_header_tabel" rowspan="4">NAMA</th>
+                        <th class="text_header_tabel" rowspan="4">PERINGKAT JABATAN</th>
 
-                        <th rowspan="4">HARGA JABATAN</th>
-                        <th rowspan="4">NILAI PRESTASI (%)</th>
-                        <th rowspan="4">TUNJANGAN DASAR</th>
-                        <th rowspan="4">TOTAL TUNJANGAN DITERIMA</th>
-                        <th colspan="16">POTONGAN KETIDAK HADIRAN KARENA :</th>
+                        <th class="text_header_tabel" rowspan="4">HARGA JABATAN</th>
+                        <th class="text_header_tabel" rowspan="4">NILAI PRESTASI (%)</th>
+                        <th class="text_header_tabel" rowspan="4">TUNJANGAN DASAR</th>
+                        <th class="text_header_tabel" rowspan="4">TOTAL TUNJANGAN DITERIMA</th>
+                        <th class="text_header_tabel" colspan="16">POTONGAN KETIDAK HADIRAN KARENA :</th>
                     </tr>
                     <tr>
-                        <th colspan="6">CUTI</th>
-                        <th colspan="2" rowspan="2">TUBEL</th>
-                        <th colspan="2" rowspan="2">IZIN</th>
-                        <th colspan="2">TIDAK MASUK KERJA</th>
-                        <th colspan="4">KEKURANGAN JAM KERJA</th>
+                        <th class="text_header_tabel" colspan="6">CUTI</th>
+                        <th class="text_header_tabel" colspan="2" rowspan="2">TUBEL</th>
+                        <th class="text_header_tabel" colspan="2" rowspan="2">IZIN</th>
+                        <th class="text_header_tabel" colspan="2">TIDAK MASUK KERJA</th>
+                        <th class="text_header_tabel" colspan="4">KEKURANGAN JAM KERJA</th>
                     </tr>
                     <tr>
-                        <th colspan="2">CUTI BESAR</th>
-                        <th colspan="2">CUTI ALASAN PENTING</th>
-                        <th colspan="2">CUTI MELAHIRKAN ANAK KE-3 DST</th>
-                        <th colspan="2">TANPA KETERANGAN</th>
-                        <th colspan="4">(DLM JAM)</th>
+                        <th class="text_header_tabel" colspan="2">CUTI BESAR</th>
+                        <th class="text_header_tabel" colspan="2">CUTI ALASAN PENTING</th>
+                        <th class="text_header_tabel" colspan="2">CUTI MELAHIRKAN ANAK KE-3 DST</th>
+                        <th class="text_header_tabel" colspan="2">TANPA KETERANGAN</th>
+                        <th class="text_header_tabel" colspan="4">(DLM JAM)</th>
                     </tr>
                     <tr>
-                        <th>BLN KE-</th>
-                        <th>Rp. POT</th>
-                        <th>BLN KE-</th>
-                        <th>Rp. POT</th>
-                        <th>BLN KE-</th>
-                        <th>Rp. POT</th>
-                        <th>BLN</th>
-                        <th>Rp. POT</th>
-                        <th>JML HARI</th>
-                        <th>Rp. POT</th>
-                        <th>JML HARI</th>
-                        <th>Rp. POT</th>
-                        <th>TL</th>
-                        <th>PSW</th>
-                        <th>TOTAL KJK</th>
-                        <th>Rp. POT</th>
+                        <th class="text_header_tabel">BLN KE-</th>
+                        <th class="text_header_tabel">Rp. POT</th>
+                        <th class="text_header_tabel">BLN KE-</th>
+                        <th class="text_header_tabel">Rp. POT</th>
+                        <th class="text_header_tabel">BLN KE-</th>
+                        <th class="text_header_tabel">Rp. POT</th>
+                        <th class="text_header_tabel">BLN</th>
+                        <th class="text_header_tabel">Rp. POT</th>
+                        <th class="text_header_tabel">JML HARI</th>
+                        <th class="text_header_tabel">Rp. POT</th>
+                        <th class="text_header_tabel">JML HARI</th>
+                        <th class="text_header_tabel">Rp. POT</th>
+                        <th class="text_header_tabel">TL</th>
+                        <th class="text_header_tabel">PSW</th>
+                        <th class="text_header_tabel">TOTAL KJK</th>
+                        <th class="text_header_tabel">Rp. POT</th>
                     </tr>
                     <tr>
-                        <th colspan='26' class="highlight-cell bg-warning" >
+                        <th colspan='26' class="highlight-cell bg-warning">
                             <i class='fa fa-list fa-fw'></i>
                             @if ($satkerName)
-                            {{ $satkerName }}
-                        @endif
+                                {{ $satkerName }}
+                            @endif
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-
                     @foreach ($tukinMatangs as $dtmatang)
-                    <tr>
-                        <td>{{ $dtmatang->nip }}</td>
-                        <td>{{ $dtmatang->nama }}</td>
-                        <td>{{ $dtmatang->gradejabatan }}</td>
-                        <td>{{ number_format($dtmatang->harga_jabatan, 0, ',', '.') }}</td>
-                        <td>{{ $dtmatang->skp_persentase }}</td>
-                        <td>{{ number_format($dtmatang->tukin_dasar, 0, ',', '.') }}</td>
-                        <td>{{ number_format($dtmatang->tukin_terima, 0, ',', '.') }}</td>
-                        <td>{{ $dtmatang->cuti_besar }}</td>
-                        <td>{{ $dtmatang->cuti_besar_pot }}</td>
-                        <td>{{ $dtmatang->cuti_penting }}</td>
-                        <td>{{ $dtmatang->cuti_penting_pot }}</td>
-                        <td>{{ $dtmatang->cuti_lahir }}</td>
-                        <td>{{ $dtmatang->cuti_lahir_pot }}</td>
-                        <td>{{ $dtmatang->tubel }}</td>
-                        <td>{{ $dtmatang->tubel_pot }}</td>
-                        <td>{{ $dtmatang->izin }}</td>
-                        <td>{{ $dtmatang->izin_pot }}</td>
-                        <td>{{ $dtmatang->tk }}</td>
-                        <td>{{ $dtmatang->tk_pot }}</td>
-                        <td>{{ $dtmatang->telat_tl }}</td>
-                        <td>{{ $dtmatang->psw }}</td>
-                        <td>{{ $dtmatang->total_kjk }}</td>
-                        <td>{{ number_format($dtmatang->kjk_pot, 0, ',', '.') }}</td>
-                    </tr>
+                        <tr>
+                            <td>{{ $dtmatang->nip }}</td>
+                            <td>{{ $dtmatang->nama }}</td>
+                            @if ($dtmatang->nip && $dtmatang->nama)
+                                <td>{{ $dtmatang->gradejabatan }}</td>
+                                <td>{{ number_format($dtmatang->harga_jabatan, 0, ',', '.') }}</td>
+                                <td>{{ $dtmatang->skp_persentase }}</td>
+                                <td>{{ number_format($dtmatang->tukin_dasar, 0, ',', '.') }}</td>
+                                <td>{{ number_format($dtmatang->tukin_terima, 0, ',', '.') }}</td>
+                                <td>{{ $dtmatang->cuti_besar }}</td>
+                                <td>{{ $dtmatang->cuti_besar_pot }}</td>
+                                <td>{{ $dtmatang->cuti_penting }}</td>
+                                <td>{{ $dtmatang->cuti_penting_pot }}</td>
+                                <td>{{ $dtmatang->cuti_lahir }}</td>
+                                <td>{{ $dtmatang->cuti_lahir_pot }}</td>
+                                <td>{{ $dtmatang->tubel }}</td>
+                                <td>{{ $dtmatang->tubel_pot }}</td>
+                                <td>{{ $dtmatang->izin }}</td>
+                                <td>{{ $dtmatang->izin_pot }}</td>
+                                <td>{{ $dtmatang->tk }}</td>
+                                <td>{{ $dtmatang->tk_pot }}</td>
+                                <td>{{ $dtmatang->telat_tl }}</td>
+                                <td>{{ $dtmatang->psw }}</td>
+                                <td>{{ $dtmatang->total_kjk }}</td>
+                                <td>{{ number_format($dtmatang->kjk_pot, 0, ',', '.') }}</td>
+                            @else
+                                <td colspan="23">
+                                    <center>Data Tunjangan belum digenerate. Silahkan generate terlebih dahulu.</center>
+                                </td>
+                            @endif
+                        </tr>
                     @endforeach
+                    {{-- @foreach ($tukinMatangs as $dtmatang)
+                        <tr>
+                            @if ($dtmatang->nip && $dtmatang->nama)
+                                <td>{{ $dtmatang->nip }}</td>
+                                <td>{{ $dtmatang->nama }}</td>
+                                <td>{{ $dtmatang->gradejabatan }}</td>
+                                <td>{{ number_format($dtmatang->harga_jabatan, 0, ',', '.') }}</td>
+                                <td>{{ $dtmatang->skp_persentase }}</td>
+                                <td>{{ number_format($dtmatang->tukin_dasar, 0, ',', '.') }}</td>
+                                <td>{{ number_format($dtmatang->tukin_terima, 0, ',', '.') }}</td>
+                                <td>{{ $dtmatang->cuti_besar }}</td>
+                                <td>{{ $dtmatang->cuti_besar_pot }}</td>
+                                <td>{{ $dtmatang->cuti_penting }}</td>
+                                <td>{{ $dtmatang->cuti_penting_pot }}</td>
+                                <td>{{ $dtmatang->cuti_lahir }}</td>
+                                <td>{{ $dtmatang->cuti_lahir_pot }}</td>
+                                <td>{{ $dtmatang->tubel }}</td>
+                                <td>{{ $dtmatang->tubel_pot }}</td>
+                                <td>{{ $dtmatang->izin }}</td>
+                                <td>{{ $dtmatang->izin_pot }}</td>
+                                <td>{{ $dtmatang->tk }}</td>
+                                <td>{{ $dtmatang->tk_pot }}</td>
+                                <td>{{ $dtmatang->telat_tl }}</td>
+                                <td>{{ $dtmatang->psw }}</td>
+                                <td>{{ $dtmatang->total_kjk }}</td>
+                                <td>{{ number_format($dtmatang->kjk_pot, 0, ',', '.') }}</td>
+                            @else
+                                <td>{{ $dtmatang->$nip }}</td>
+                                <td>{{ $dtmatang->$nama }}</td>
+                                <td colspan='21'>
+                                    <center>Data Tunjangan belum digenerate. Silahkan generate terlebih dahulu.</center>
+                                </td>
+                                <!-- Tambahkan kolom lain sesuai kebutuhan -->
+                            @endif
+                        </tr>
+                    @endforeach --}}
                     <!-- Isi data random untuk beberapa baris lainnya -->
                 </tbody>
-        </table>
+            </table>
         </div>
     @endsection

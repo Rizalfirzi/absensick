@@ -116,7 +116,7 @@
             "scrollX": true,
           });
       });
-      $('#example3 thead th').css('text-align', 'center');
+      $('.text_header_tabel').css('text-align', 'center');
   </script>
 
   <script>

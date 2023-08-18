@@ -79,13 +79,12 @@ class TukinController extends Controller
 
         $direktorats = DB::table('direktorat')->get();
 
-        $tukinMatangs = DB::table('t_tukin_matang')
-        ->select(
-            't_tukin_matang.nip',
+        $tukinMatangs = Tukin::select(
+            't_pegawai.nip',
             't_pegawai.nama',
             'satker.nama AS nama_satker',
             't_tukin_matang.gradejabatan',
-            't_tukin_matang.harga_jabatan',
+            'harga_jabatan.harga_jabatan',
             't_tukin_matang.skp_persentase',
             't_tukin_matang.tukin_dasar',
             't_tukin_matang.tukin_terima',
@@ -110,7 +109,7 @@ class TukinController extends Controller
             't_tukin_matang.tot_potongan'
 
         )
-        ->join('t_pegawai', 't_tukin_matang.nip', '=', 't_pegawai.nip')
+        ->join('t_pegawai', 't_pegawai.nip','=','t_tukin_matang.nip'  )
         ->leftJoin('harga_jabatan', 't_pegawai.gradejabatan', '=', 'harga_jabatan.peringkat_jabatan')
         ->leftJoin('satker', 't_pegawai.satker_id', '=', 'satker.satker_id');
 
