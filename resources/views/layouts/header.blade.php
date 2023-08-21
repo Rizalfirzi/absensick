@@ -22,6 +22,9 @@
 <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" rel="stylesheet">
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.css" />
 
 <style>
     .img-with-stroke {
@@ -57,7 +60,7 @@
     #dtHorizontalVerticalExample th,
     td {
         white-space: nowrap;
-        max-width: 500px;
+        max-width: auto;
         font-size: 12px;
         /* Mengurangi ukuran font */
     }

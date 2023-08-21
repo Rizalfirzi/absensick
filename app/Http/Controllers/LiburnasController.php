@@ -41,25 +41,11 @@ class LiburnasController extends Controller
     {
         //
         $validatedData = $request->validate([
-            'tanggal' => 'required',
+            'tanggal' => 'required|date',
             'keterangan' => 'required',
         ]);
 
-        // Mengambil nilai terbesar saat ini dari kolom 'kdharilibur'
-        $lastKdharilibur = Harilibur::max('kdharilibur');
-
-        // Mengecek apakah ada data sebelumnya atau belum
-        if (!$lastKdharilibur) {
-            $newKdharilibur = 1; // Jika belum ada data, dimulai dari 1
-        } else {
-            $newKdharilibur = $lastKdharilibur + 1; // Jika sudah ada data, tambahkan 1
-        }
-
-        // Menambahkan 'kdharilibur' ke dalam data yang divalidasi
-        $validatedData['kdharilibur'] = $newKdharilibur;
-
-        // Membuat record baru menggunakan data yang sudah divalidasi
-        $harilibur = Harilibur::create($validatedData);
+        Harilibur::create($validatedData);
 
         return redirect()->route('libur.index')->with('success', 'Libur created successfully!');
     }

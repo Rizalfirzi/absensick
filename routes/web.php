@@ -8,6 +8,7 @@ use App\Http\Controllers\TukinController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\LiburnasController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LiburlokalController;
 use App\Http\Controllers\HargajabatanController;
 use App\Http\Controllers\HarikerjapuasaController;
 
@@ -59,5 +60,10 @@ Route::middleware('auth.route')->group(function () {
     Route::get('/get-satker/{direktoratId}', [TukinController::class, 'getSatker']);
     Route::post('/tukin', [TukinController::class, 'filter'])->name('tukin.filter');
 
+    //route hariliburlokal
+    Route::resource('liburlokal', LiburlokalController::class);
+    Route::get('/get-satker/{direktoratId}', [LiburlokalController::class, 'getSatker']);
+    Route::post('/liburlokal', [LiburlokalController::class, 'filter'])->name('liburlokal.filter');
+    Route::post('/simpan', [LiburlokalController::class, 'store'])->name('liburlokal.store');
 
 });

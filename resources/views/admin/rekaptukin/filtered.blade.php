@@ -49,9 +49,18 @@
                         <div class="col-md-2">
                             <h5>Bulan</h5>
                             <select name="bulan" id="bulan" class="well1 col-md-12 form-control">
-                                @foreach ($months as $bulan)
-                                    <option value="{{ $bulan }}">{{ $bulan }}</option>
-                                @endforeach
+                                    <option value="1">Januari</option>
+                                    <option value="2">Februari</option>
+                                    <option value="3">Maret</option>
+                                    <option value="4">April</option>
+                                    <option value="5">Mei</option>
+                                    <option value="6">Juni</option>
+                                    <option value="7">Juli</option>
+                                    <option value="8">Agustus</option>
+                                    <option value="9">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -75,9 +84,10 @@
 
         <br>
         <div class="containerScrol">
-            <table id="example3" class="lebartabel table table-bordered table-striped" width="100%" cellspacing="1">
+            <table id="example3" class="lebartabel table table-bordered " width="100%" cellspacing="1">
                 <thead>
                     <tr>
+                        <th class="text_header_tabel" rowspan="4">#</th>
                         <th class="text_header_tabel" rowspan="4">NIP</th>
                         <th class="text_header_tabel" rowspan="4">NAMA</th>
                         <th class="text_header_tabel" rowspan="4">PERINGKAT JABATAN</th>
@@ -132,6 +142,7 @@
                 <tbody>
                     @foreach ($tukinMatangs as $dtmatang)
                         <tr>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $dtmatang->nip }}</td>
                             <td>{{ $dtmatang->nama }}</td>
                             @if ($dtmatang->nip && $dtmatang->nama)
@@ -139,9 +150,9 @@
                                 <td>{{ number_format($dtmatang->harga_jabatan, 0, ',', '.') }}</td>
                                 <td>{{ $dtmatang->skp_persentase }}</td>
                                 <td>{{ number_format($dtmatang->tukin_dasar, 0, ',', '.') }}</td>
-                                <td>{{ number_format($dtmatang->tukin_terima, 0, ',', '.') }}</td>
+                                <td style=" background-color: rgb(10, 10, 90); color:white">Rp.{{ number_format($dtmatang->tukin_terima, 0, ',', '.') }}</td>
                                 <td>{{ $dtmatang->cuti_besar }}</td>
-                                <td>{{ $dtmatang->cuti_besar_pot }}</td>
+                                <td>{{ number_format($dtmatang->cuti_besar_pot, 0, ',', '.') }}</td>
                                 <td>{{ $dtmatang->cuti_penting }}</td>
                                 <td>{{ $dtmatang->cuti_penting_pot }}</td>
                                 <td>{{ $dtmatang->cuti_lahir }}</td>

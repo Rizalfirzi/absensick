@@ -57,20 +57,6 @@ class TukinController extends Controller
         $satkerId = $request->input('satker');
         $selectedTahun = $request->input('tahun');
         $selectedBulan = $request->input('bulan');
-        $months = [
-            1 => 'Januari',
-            2 => 'Februari',
-            3 => 'Maret',
-            4 => 'April',
-            5 => 'Mei',
-            6 => 'Juni',
-            7 => 'Juli',
-            8 => 'Agustus',
-            9 => 'September',
-            10 => 'Oktober',
-            11 => 'November',
-            12 => 'Desember',
-        ];
 
         $currentYear = date('Y');
         $startYear = 2016;
@@ -109,7 +95,7 @@ class TukinController extends Controller
             't_tukin_matang.tot_potongan'
 
         )
-        ->join('t_pegawai', 't_pegawai.nip','=','t_tukin_matang.nip'  )
+        ->join('t_pegawai', 't_pegawai.nip','=','t_tukin_matang.nip')
         ->leftJoin('harga_jabatan', 't_pegawai.gradejabatan', '=', 'harga_jabatan.peringkat_jabatan')
         ->leftJoin('satker', 't_pegawai.satker_id', '=', 'satker.satker_id');
 
@@ -129,7 +115,7 @@ class TukinController extends Controller
         }
 
         if ($selectedBulan) {
-            $tukinMatangs->where('bulan', array_search($selectedBulan, $months));
+            $tukinMatangs->where('bulan',$selectedBulan);
         }
 
         $tukinMatangs = $tukinMatangs
@@ -137,7 +123,7 @@ class TukinController extends Controller
             ->orderBy('t_pegawai.nama', 'asc')
             ->get();
 
-        return view('admin.rekaptukin.filtered', compact('direktorats', 'years', 'months', 'tukinMatangs','satkerName'));
+        return view('admin.rekaptukin.filtered', compact('direktorats', 'years', 'tukinMatangs','satkerName'));
     }
     /**
      * Show the form for creating a new resource.

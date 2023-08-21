@@ -118,7 +118,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('liburlokal.index')}}" aria-expanded="false">
                         <span>
                             <i class="fa fa-calendar fa-fw"></i>
                         </span>

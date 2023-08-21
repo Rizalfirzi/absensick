@@ -51,6 +51,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.min.js"></script>
+
   <script>
       document.addEventListener('DOMContentLoaded', function() {
           fetch('/chart-data')
@@ -97,6 +102,35 @@
   </script>
 
   <script>
+       $(document).ready(function() {
+        $('#config-demo').daterangepicker({
+            singleDatePicker: true
+        });
+
+        updateConfig();
+
+        function updateConfig() {
+            var options = {};
+
+            options.ranges = {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            };
+            options.alwaysShowCalendars = false;
+
+            $('#config-demo').daterangepicker(options, function(start, end, label) {
+                $('#awal').val(start.format('YYYY-MM-DD'));
+                $('#akhir').val(end.format('YYYY-MM-DD'));
+            });
+        }
+    });
+  </script>
+
+  <script>
       $(document).ready(function() {
           new DataTable('#example', {
               "scrollX": true,
@@ -108,15 +142,16 @@
       });
       $(document).ready(function() {
           new DataTable('#example2', {
-            "scrollX": true,
+              "scrollX": true,
           });
       });
       $(document).ready(function() {
           new DataTable('#example3', {
-            "scrollX": true,
+              "scrollX": true,
           });
       });
       $('.text_header_tabel').css('text-align', 'center');
+      $('table#example3 td').css('border-bottom', '1px solid #ccc');
   </script>
 
   <script>
