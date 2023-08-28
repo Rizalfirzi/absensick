@@ -38,4 +38,52 @@
     </div>
     </div>
     </div>
+    
+    <script src="{{ asset('js/chart/code/highcharts.js') }}"></script>
+    <script src="{{ asset('js/chart/code/modules/exporting.js') }}"></script>
+    <script src="{{ asset('js/chart/code/highchartv11-1-0.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/chart-data')
+                .then(response => response.json())
+                .then(data => {
+                    const chart = Highcharts.chart('chartContainer', {
+                        chart: {
+                            type: 'pie'
+
+                        },
+                        title: {
+                            text: 'Data Jumlah Pegawai Direktorat Jenderal Cipta Karya'
+                        },
+                        tooltip: {
+                            pointFormat: '<b>{point.y:.0f} Pegawai</b>'
+                            //pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '<b>{point.name}</b>: {point.y:.0f} Pegawai',
+                                    style: {
+                                        color: (Highcharts.theme && Highcharts.theme
+                                            .contrastTextColor) || 'black'
+                                    }
+                                }
+                            }
+                        },
+                        series: [{
+                            name: 'Pegawai',
+                            data: [
+                                ['PNS', data.pns],
+                                ['Non PNS Pendukung', data.pendukung],
+                                ['Non PNS Substansi', data.substansi],
+                                ['Bukan Non PNS', data.ki],
+                            ]
+                        }]
+                    });
+                });
+        });
+    </script>
 @endsection

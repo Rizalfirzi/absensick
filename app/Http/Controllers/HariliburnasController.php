@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Harilibur;
+use App\Models\hariliburnas;
 use Illuminate\Http\Request;
 
-class LiburnasController extends Controller
+class HariliburnasController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $liburnas = Harilibur::orderBy('tanggal', 'asc')->get();
+        //
+        $liburnas = hariliburnas::orderBy('tanggal', 'asc')->get();
         // dd($liburnas);
 
         return view('admin.hariliburnas.index', compact('liburnas'));
@@ -22,8 +21,6 @@ class LiburnasController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -33,53 +30,39 @@ class LiburnasController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
         $validatedData = $request->validate([
             'tanggal' => 'required|date',
             'keterangan' => 'required',
         ]);
 
-        Harilibur::create($validatedData);
+        hariliburnas::create($validatedData);
 
-        return redirect()->route('libur.index')->with('success', 'Libur created successfully!');
+        return redirect()->route('libur.index')->with('success', 'Data libur berhasil ditambahkan.');
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(hariliburnas $hariliburnas)
     {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function edit($libur)
     {
-        $liburnas = Harilibur::where('kdharilibur', $libur)->first();
+        $liburnas = hariliburnas::where('kdharilibur', $libur)->first();
 
         return view('admin.hariliburnas.edit', compact('liburnas'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $libur)
     {
@@ -89,7 +72,7 @@ class LiburnasController extends Controller
                 'keterangan' => 'required',
             ]);
 
-            $liburnas = Harilibur::where('kdharilibur', $libur)->first();
+            $liburnas = hariliburnas::where('kdharilibur', $libur)->first();
 
             $liburnas->update($request->all());
 
@@ -98,14 +81,11 @@ class LiburnasController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($libur)
     {
         //
-        $liburnas = Harilibur::where('kdharilibur', $libur)->first();
+        $liburnas = hariliburnas::where('kdharilibur', $libur)->first();
         $liburnas->delete();
 
         return redirect()->route('libur.index')->with('success', 'Data berhasil dihapus!');

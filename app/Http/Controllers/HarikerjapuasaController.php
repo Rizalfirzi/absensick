@@ -24,6 +24,7 @@ class HarikerjapuasaController extends Controller
     public function create()
     {
         //
+        return view('admin.harikerjapuasa.create');
     }
 
     /**
@@ -31,7 +32,21 @@ class HarikerjapuasaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // Validasi data input jika diperlukan
+        $validatedData = $request->validate([
+            'hari' => 'required',
+            'tgl_awal' => 'required|date',
+            'tgl_akhir' => 'required|date',
+            'jam_masuk' => 'required',
+            'jam_keluar' => 'required',
+            'ket' => 'required',
+        ]);
+
+        // Simpan data ke dalam database
+        Tjamkerja::create($validatedData);
+        
+        // dd($validatedData);
+        return redirect()->route('harikerjapuasa.index')->with('success', 'Data berhasil disimpan.');
     }
 
     /**
@@ -62,7 +77,7 @@ class HarikerjapuasaController extends Controller
         $validatedData = $request->validate([
             'hari' => 'required',
             'tgl_awal' => 'required|date',
-            'tgl_akhir' => 'required|date', 
+            'tgl_akhir' => 'required|date',
             'jam_masuk' => 'required',
             'jam_keluar' => 'required',
             'ket' => 'required',
@@ -71,7 +86,9 @@ class HarikerjapuasaController extends Controller
         $harikerjapuasa = Tjamkerja::findOrFail($id);
         $harikerjapuasa->update($validatedData);
 
-        return redirect()->route('harikerjapuasa.index')->with('success', 'Jam kerja berhasil diperbarui.');
+        return redirect()
+            ->route('harikerjapuasa.index')
+            ->with('success', 'Jam kerja berhasil diperbarui.');
     }
 
     /**

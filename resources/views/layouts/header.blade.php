@@ -1,8 +1,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SISTEM INFORMASI KEHADIRAN PEGAWAI - DITJEN CIPTA KARYA</title>
+<link href="{{ asset('assets/bower_components/js/chzn/chosen.css')}}" rel="stylesheet">
 <link rel="icon" type="images/jpg" href="{{ asset('assets/img/logo.jpg') }}" />
-<link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/favicon.png') }}" />
 <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://cdn.datatables.net/1.11.2/css/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -25,6 +25,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chosen-js@1.8.7/chosen.min.css">
 
 <style>
     .img-with-stroke {
@@ -96,12 +98,12 @@
         margin-left: 10px;
     }
 
-    input {
+    /* input {
         border: 1px solid #ccc;
         border-radius: 10px;
         padding: 8px;
         background-color: #f0f0f0;
-    }
+    } */
 
     textarea {
         border: 1px solid #ccc;
@@ -159,5 +161,9 @@
         border-collapse: collapse;
         width: 900px;
     }
+
+    .fontkecil {
+        width: 10px;
+}
 
 </style>

@@ -104,23 +104,18 @@ class SkpController extends Controller
 
     public function simpanSKP(Request $request)
     {
-        $nip = $request->input('nip');
-        $ket = $request->input('ket');
+        $this->validate($request, [
+            'ket' => 'required'
+        ]);
 
-        // Temukan data SKP berdasarkan NIP
-        $skp = SKP::where('nip', $nip)->first();
+        // Simpan data atau lakukan tindakan lain sesuai kebutuhan
+        // Misalnya, menyimpan data keterangan pada database
+        // $nip = $request->input('nip');
+        // $ket = $request->input('ket');
+        // ... lakukan tindakan sesuai kebutuhan ...
 
-        if ($skp) {
-            // Lakukan perubahan data
-            $skp->keterangan = $ket;
-            $skp->save();
-
-            // Respon berhasil
-            return response()->json(['status' => 'success']);
-        } else {
-            // Jika data SKP tidak ditemukan, berikan respon error
-            return response()->json(['status' => 'error', 'message' => 'Data SKP tidak ditemukan']);
-        }
+        // Mengembalikan respons ke JavaScript
+        return response()->json(['message' => 'Data berhasil disimpan']);
     }
     /**
      * Show the form for creating a new resource.

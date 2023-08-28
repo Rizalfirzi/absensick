@@ -10,9 +10,8 @@ class Tjamkerja extends Model
     use HasFactory;
 
     protected $table = 't_jamkerja';
-
-    protected $guarded = [];
-
+    protected $primaryKey = 'id';
     public $timestamps = false;
+    protected $fillable = ['tgl_awal', 'tgl_akhir', 'jam_masuk', 'jam_keluar', 'ket', 'hari'];
 
 }

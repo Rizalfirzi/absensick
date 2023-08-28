@@ -46,13 +46,20 @@ class LiburlokalController extends Controller
             });
         }
 
+        $satkerName = ''; // Initialize $satkerName
+
         if ($satkerId) {
-            $liburLokal->where(function ($query) use ($satkerId) {
-                $query->where('liburlokal.kdunitkerja', $satkerId);
-            });
-            $satkerName = DB::table('satker')
-                ->where('satker_id', $satkerId)
-                ->value('nama');
+            if ($satkerId === 'all') {
+                $liburLokal->whereNotNull('liburlokal.kdunitkerja');
+                $satkerName = 'All Satker';
+            } else {
+                $liburLokal->where(function ($query) use ($satkerId) {
+                    $query->where('liburlokal.kdunitkerja', $satkerId);
+                });
+                $satkerName = DB::table('satker')
+                    ->where('satker_id', $satkerId)
+                    ->value('nama');
+            }
         }
 
         $liburLokals = $liburLokal->orderBy('liburlokal.tanggal')->get();
@@ -79,7 +86,9 @@ class LiburlokalController extends Controller
 
         Liburlokal::create($validatedData);
 
-        return redirect()->route('liburlokal.index')->with('success', 'Data libur berhasil ditambahkan.');
+        return redirect()
+            ->route('liburlokal.index')
+            ->with('success', 'Data libur berhasil ditambahkan.');
     }
 
     /**

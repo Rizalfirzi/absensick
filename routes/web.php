@@ -4,12 +4,13 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SkpController;
+use App\Http\Controllers\IzinController;
 use App\Http\Controllers\TukinController;
 use App\Http\Controllers\PegawaiController;
-use App\Http\Controllers\LiburnasController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LiburlokalController;
 use App\Http\Controllers\HargajabatanController;
+use App\Http\Controllers\HariliburnasController;
 use App\Http\Controllers\HarikerjapuasaController;
 
 /*
@@ -36,7 +37,7 @@ Route::middleware('auth.route')->group(function () {
     Route::get('/chart-data', [DashboardController::class, 'chartData']);
 
     // route LiburnasController
-    Route::resource('libur', LiburnasController::class);
+    Route::resource('libur', HariliburnasController::class);
 
     // route PegawaiController
     Route::resource('pegawai', PegawaiController::class);
@@ -53,7 +54,7 @@ Route::middleware('auth.route')->group(function () {
     Route::resource('skp', SkpController::class);
     Route::get('/get-satker/{direktoratId}', [SkpController::class, 'getSatker']);
     Route::post('/skp', [SkpController::class, 'filter'])->name('skp.filter');
-    Route::post('/simpan-skp', [SkpController::class, 'simpanSKP'])->name('simpan_skp');
+    Route::post('/simpan_skp', [SkpController::class, 'simpanSkp'])->name('simpan_skp');
 
     // route TukinController
     Route::resource('tukin', TukinController::class);
@@ -65,5 +66,10 @@ Route::middleware('auth.route')->group(function () {
     Route::get('/get-satker/{direktoratId}', [LiburlokalController::class, 'getSatker']);
     Route::post('/liburlokal', [LiburlokalController::class, 'filter'])->name('liburlokal.filter');
     Route::post('/simpan', [LiburlokalController::class, 'store'])->name('liburlokal.store');
+
+    //route izin
+    Route::resource('izin', IzinController::class);
+    Route::post('/izin', [IzinController::class, 'filter'])->name('izin.filter');
+
 
 });

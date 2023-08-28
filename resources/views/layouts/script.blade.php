@@ -2,7 +2,6 @@
   <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('assets/js/sidebarmenu.js') }}"></script>
   <script src="{{ asset('assets/js/app.min.js') }}"></script>
-  <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
   <script src="{{ asset('assets/libs/simplebar/dist/simplebar.js') }}"></script>
   <script src="{{ asset('assets/js/dashboard.js') }}"></script>
 
@@ -15,15 +14,12 @@
   <script src="{{ asset('assets/bower_components/metisMenu/dist/metisMenu.min.js') }}"></script>
 
   <!-- Custom Theme JavaScript -->
-  <script src="{{ asset('assets/bower_components/dist/js/sb-admin-2.js') }}"></script>
   <script src="{{ asset('assets/bower_components/moment.js') }}"></script>
   <script src="{{ asset('assets/bower_components/daterangepicker.js') }}"></script>
   <script src="{{ asset('assets/bower_components/js/jquery.doubleScroll.js') }}"></script>
   <script src="{{ asset('assets/bower_components/js/chzn/chosen.jquery.js') }}"></script>
 
-  <script src="{{ asset('js/chart/code/highcharts.js') }}"></script>
-  <script src="{{ asset('js/chart/code/modules/exporting.js') }}"></script>
-  <script src="{{ asset('js/chart/code/highchartv11-1-0.js') }}"></script>
+  <script src="{{ asset('assets/bower_components/js/chzn/chosen.jquery.js') }}"></script>
 
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -54,80 +50,86 @@
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.min.js"></script>
 
+<script src="{{asset('assets/select_search/select.jquery.js')}}"></script>
   <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          fetch('/chart-data')
-              .then(response => response.json())
-              .then(data => {
-                  const chart = Highcharts.chart('chartContainer', {
-                      chart: {
-                          type: 'pie'
+      $(document).ready(function() {
+          // Initialize chosen
+          $('#nip').chosen();
 
-                      },
-                      title: {
-                          text: 'Data Jumlah Pegawai Direktorat Jenderal Cipta Karya'
-                      },
-                      tooltip: {
-                          pointFormat: '<b>{point.y:.0f} Pegawai</b>'
-                          //pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                      },
-                      plotOptions: {
-                          pie: {
-                              allowPointSelect: true,
-                              cursor: 'pointer',
-                              dataLabels: {
-                                  enabled: true,
-                                  format: '<b>{point.name}</b>: {point.y:.0f} Pegawai',
-                                  style: {
-                                      color: (Highcharts.theme && Highcharts.theme
-                                          .contrastTextColor) || 'black'
-                                  }
-                              }
-                          }
-                      },
-                      series: [{
-                          name: 'Pegawai',
-                          data: [
-                              ['PNS', data.pns],
-                              ['Non PNS Pendukung', data.pendukung],
-                              ['Non PNS Substansi', data.substansi],
-                              ['Bukan Non PNS', data.ki],
-                          ]
-                      }]
-                  });
+          // Trigger the chosen search feature when typing
+          $('#nip_chosen .chosen-search input[type="text"]').on('keyup', function() {
+              var searchText = $(this).val();
+              $('#nip option').each(function() {
+                  if ($(this).text().toLowerCase().indexOf(searchText.toLowerCase()) === -1) {
+                      $(this).hide();
+                  } else {
+                      $(this).show();
+                  }
               });
+          });
       });
   </script>
 
   <script>
-       $(document).ready(function() {
-        $('#config-demo').daterangepicker({
-            singleDatePicker: true
-        });
+      $(document).ready(function() {
+          $('#config-demo').daterangepicker({
+              singleDatePicker: true
+          });
 
-        updateConfig();
+          updateConfig();
 
-        function updateConfig() {
-            var options = {};
+          function updateConfig() {
+              var options = {};
 
-            options.ranges = {
-                'Today': [moment(), moment()],
-                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-            };
-            options.alwaysShowCalendars = false;
+              options.ranges = {
+                  'Today': [moment(), moment()],
+                  'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                  'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                  'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                  'This Month': [moment().startOf('month'), moment().endOf('month')],
+                  'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month')
+                      .endOf('month')
+                  ]
+              };
+              options.alwaysShowCalendars = false;
 
-            $('#config-demo').daterangepicker(options, function(start, end, label) {
-                $('#awal').val(start.format('YYYY-MM-DD'));
-                $('#akhir').val(end.format('YYYY-MM-DD'));
-            });
-        }
-    });
+              $('#config-demo').daterangepicker(options, function(start, end, label) {
+                  $('#awal').val(start.format('YYYY-MM-DD'));
+                  $('#akhir').val(end.format('YYYY-MM-DD'));
+              });
+          }
+      });
+
+      $(document).ready(function() {
+          $('#config-demo-izin').daterangepicker({
+              singleDatePicker: true
+          });
+
+          updateConfig();
+
+          function updateConfig() {
+              var options = {};
+
+              options.ranges = {
+                  // 'Today': [moment(), moment()],
+                  // 'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                  // 'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                  // 'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                  // 'This Month': [moment().startOf('month'), moment().endOf('month')],
+                  // 'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+              };
+              options.alwaysShowCalendars = false;
+
+              $('#config-demo-izin').daterangepicker(options, function(start, end, label) {
+                  $('#awal').val(start.format('YYYY-MM-DD'));
+                  $('#akhir').val(end.format('YYYY-MM-DD'));
+              });
+          }
+      });
+      $('.daterangepicker').css('font-size', ''); // Sesuaikan ukuran font sesuai keinginan
+      $('.daterangepicker .form-control').css('font-size', ''); // Sesuaikan ukuran font sesuai keinginan
   </script>
 
   <script>
@@ -173,7 +175,7 @@
           const satkerSelect = document.getElementById('satker');
 
           // Clear opsi satker sebelumnya
-          satkerSelect.innerHTML = '<option value="">-- Pilih Satker --</option>';
+          satkerSelect.innerHTML = '<option value="">-- Semua Satker --</option>';
 
           // Jika direktorat terpilih, ambil data satker melalui AJAX
           if (selectedDirektoratId) {
@@ -186,6 +188,12 @@
                           option.textContent = satker.nama;
                           satkerSelect.appendChild(option);
                       });
+
+                      // Add an "All Satker" option
+                      const allOption = document.createElement('option');
+                      allOption.value = 'all';
+                      allOption.textContent = 'All Satker';
+                      satkerSelect.appendChild(allOption);
                   });
           }
       });

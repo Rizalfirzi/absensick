@@ -13,7 +13,7 @@ class Skp extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'id', 'nip', 'nilai', 'persentase', 'tahun'
+        'id', 'nip', 'nilai', 'persentase', 'tahun','ket'
     ];
 
     public function pegawai()

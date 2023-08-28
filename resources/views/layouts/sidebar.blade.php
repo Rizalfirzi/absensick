@@ -127,7 +127,7 @@
                 </li>
                 <hr>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('izin.index')}}" aria-expanded="false">
                         <span>
                             <i class="fa fa-close fa-fw"></i>
                         </span>
