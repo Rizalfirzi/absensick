@@ -19,7 +19,6 @@
     <!-- Custom CSS -->
 
     <link href="{{asset('assets/bower_components/dist/css/sb-admin-2.css')}}" rel="stylesheet">
-	<link href="{{asset('assets/bower_components/js/chzn/chosen.css')}}" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="{{asset('assets/bower_components/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('assets/bower_components/daterangepicker.css')}}" rel="stylesheet" type="text/css">
@@ -27,19 +26,14 @@
 
 	<link href='https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css' rel='stylesheet' type='text/css'>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body>
-    <div id="app">
         <nav class="navbar  navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header hidden_print">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -105,7 +99,6 @@
         <main class="py-4">
             @yield('content')
         </main>
-    </div>
 
      <!-- jQuery -->
      <script src="{{asset('assets/bower_components/jquery/dist/jquery.min.js')}}"></script>
@@ -116,11 +109,8 @@
     <script src="{{asset('assets/bower_components/metisMenu/dist/metisMenu.min.js')}}"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="{{asset('assets/dist/js/sb-admin-2.js')}}"></script>
 	<script src="{{asset('assets/bower_components/moment.js')}}"></script>
 	<script src="{{asset('assets/bower_components/daterangepicker.js')}}"></script>
-	<script src="{{asset('assets/js/jquery.doubleScroll.js')}}"></script>
-	<script src="{{asset('assets/js/chzn/chosen.jquery.js')}}"></script>
 
     <script>
         function togglePasswordVisibility() {
